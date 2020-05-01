@@ -1,8 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>KaTex语法测试</title>
+    <url>/2020/04/26/KaTex/</url>
+    <content><![CDATA[<p>$f(x) = sin(x) + 12$</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>杂件</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World2</title>
     <url>/2020/04/25/hello-world%20-%202/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>杂件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown语法测试</title>
+    <url>/2020/04/26/TestMD/</url>
+    <content><![CDATA[<p>#标题<br># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
+<p>##段落的换行可以使用空行来换行</p>
+<a id="more"></a>
+<p>#字体<br><em>斜的</em>  <strong>加粗</strong>   <strong><em>粗斜体</em></strong><br>*斜体文本*<br>**粗体文本**<br>***粗斜体文本***</p>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="###分割线"></a>###分割线</h2><p>一行中用三个以上的星号、减号、底线<br>-------</p>
+<p>###删除线<br><del>我不知道</del><br>~~我不知道~~</p>
+<p>###下划线<br><u>画重点</u>  &emsp; &emsp;  &lt;u&gt;画重点&lt;/u&gt;</p>
+<p>####行内空格<br>我觉&emsp;得&ensp;这很&nbsp;棒<br>&amp;emsp;  &amp;ensp; &amp;nbsp;</p>
+<p>####脚注<br>我喜欢ta[^他]<br>[^他]: 小花生</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>杂件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/04/24/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <a id="more"></a>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
@@ -39,28 +96,47 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/04/24/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <title>基础查询1</title>
+    <url>/2020/05/01/%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2/</url>
+    <content><![CDATA[<p>#查询</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 查询列表 from 表名;</span><br></pre></td></tr></table></figure>
+<p><strong>查询列表</strong>：<br>1、查询列表可以是：表中的字段、常量值、表达式、函数<br>2、查询的结果是一个虚拟的表格</p>
+<p>###查询字段<br>1.查询表中的单个字段</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name FROM employees;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>2.查询表中的多个字段</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name,salary,email FROM employees;</span><br></pre></td></tr></table></figure>
+<p>3.查询表中的所有字段</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT * FROM employees;</span><br></pre></td></tr></table></figure>
+<p><strong>补充</strong>：如果你的字段名和MySQL的关键字冲突，那么可以通过给字段名添加双引号的方式来避免冲突</p>
+<p>###查询常量值(目前不知道有啥用)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100;</span><br><span class="line">SELECT <span class="string">'john'</span>;</span><br></pre></td></tr></table></figure>
+<p>###查询表达式</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100%98;</span><br></pre></td></tr></table></figure>
+<p>###查询函数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT VERSION();</span><br></pre></td></tr></table></figure>
+<p>###起别名<br> ①便于理解<br> ②如果要查询的字段有重名的情况，使用别名可以区分开来</p>
+<p><strong>方式一</strong>：使用as</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100%98 AS 结果;</span><br><span class="line">SELECT last_name AS 姓,first_name AS 名 FROM employees;</span><br></pre></td></tr></table></figure>
+<p><strong>方式二</strong>：使用空格</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name 姓,first_name 名 FROM employees;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><strong>补充</strong>：如果你的别名的含有MySQL的关键字比如 out put 中的 out，那么就需要给别名一个双引号(推荐)或者单引号来标识</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT salary AS <span class="string">"out put"</span> FROM employees;</span><br></pre></td></tr></table></figure>
+<p>###去重<br><strong>引子</strong>：查询员工表中涉及到的所有的部门编号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT DISTINCT department_id FROM employees;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>###MySQL中的 +号<br><strong>引子</strong>:将员工的姓与名两个字段放在一个字段中显示<br>如果和Java中的字符串连接一样，用+号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select last_name + first_name as 姓名 from employees;</span><br><span class="line">结果显示：</span><br><span class="line">+------+</span><br><span class="line">| 姓名 |</span><br><span class="line">+------+</span><br><span class="line">|    0 |</span><br><span class="line">|    0 |</span><br><span class="line">|    0 | 后面都是0</span><br></pre></td></tr></table></figure>
+<p><strong>原因</strong>：<br><strong>在java中的+号</strong>：<br>①运算符，两个操作数都为数值型<br>②连接符，只要有一个操作数为字符串</p>
+<p><strong>在mysql中的+号</strong>：<br>仅仅只有一个功能：运算符</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 100+90; 两个操作数都为数值型，则做加法运算</span><br><span class="line">只要其中一方为字符型，试图将字符型数值转换成数值型 </span><br><span class="line">select <span class="string">'123'</span>+90;    如果转换成功，则继续做加法运算</span><br><span class="line">select <span class="string">'john'</span>+90;	如果转换失败，则将字符型数值转换成0</span><br><span class="line"></span><br><span class="line">select null+10; 只要其中一方为null，则结果肯定为null</span><br></pre></td></tr></table></figure>
+<p>既然不能用 + 号，MySQL有一个concat()函数可以解决这个字符串拼接的问题</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT CONCAT(last_name, <span class="string">' '</span> ,first_name) AS 姓名 FROM employees;</span><br><span class="line">mysql&gt; SELECT CONCAT(last_name, <span class="string">' '</span> ,first_name) AS 姓名 FROM employees;</span><br><span class="line">+-------------------+</span><br><span class="line">| 姓名              |</span><br><span class="line">+-------------------+</span><br><span class="line">| K_ing Steven      |</span><br><span class="line">| Kochhar Neena     |</span><br><span class="line">| De Haan Lex       |</span><br><span class="line">| Hunold Alexander  |</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>测试</category>
+        <category>MySQL</category>
+        <category>基础</category>
       </categories>
-      <tags>
-        <tag>杂件</tag>
-      </tags>
   </entry>
 </search>
