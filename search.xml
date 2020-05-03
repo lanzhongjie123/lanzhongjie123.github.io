@@ -1,114 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/04/24/test/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <title>基础查询</title>
+    <url>/2020/05/01/MySQL/%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2/</url>
+    <content><![CDATA[<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 查询列表 from 表名;</span><br></pre></td></tr></table></figure>
+<p><strong>查询列表</strong>：<br>1、查询列表可以是：表中的字段、常量值、表达式、函数<br>2、查询的结果是一个虚拟的表格</p>
+<h3 id="查询字段"><a href="#查询字段" class="headerlink" title="查询字段"></a>查询字段</h3><p>1.查询表中的单个字段</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name FROM employees;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>2.查询表中的多个字段</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name,salary,email FROM employees;</span><br></pre></td></tr></table></figure>
+<p>3.查询表中的所有字段</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT * FROM employees;</span><br></pre></td></tr></table></figure>
+<p><strong>补充</strong>：如果你的字段名和MySQL的关键字冲突，那么可以通过给字段名添加双引号的方式来避免冲突</p>
+<h3 id="查询常量值-目前不知道有啥用"><a href="#查询常量值-目前不知道有啥用" class="headerlink" title="查询常量值(目前不知道有啥用)"></a>查询常量值(目前不知道有啥用)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100;</span><br><span class="line">SELECT <span class="string">'john'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="查询表达式"><a href="#查询表达式" class="headerlink" title="查询表达式"></a>查询表达式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100%98;</span><br></pre></td></tr></table></figure>
+<h3 id="查询函数"><a href="#查询函数" class="headerlink" title="查询函数"></a>查询函数</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT VERSION();</span><br></pre></td></tr></table></figure>
+<h3 id="起别名"><a href="#起别名" class="headerlink" title="起别名"></a>起别名</h3><p> ①便于理解<br> ②如果要查询的字段有重名的情况，使用别名可以区分开来</p>
+<p><strong>方式一</strong>：使用as</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100%98 AS 结果;</span><br><span class="line">SELECT last_name AS 姓,first_name AS 名 FROM employees;</span><br></pre></td></tr></table></figure>
+<p><strong>方式二</strong>：使用空格</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name 姓,first_name 名 FROM employees;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
+<p><strong>补充</strong>：如果你的别名的含有MySQL的关键字比如 out put 中的 out，那么就需要给别名一个双引号(推荐)或者单引号来标识</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT salary AS <span class="string">"out put"</span> FROM employees;</span><br></pre></td></tr></table></figure>
+<h3 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h3><p><strong>引子</strong>：查询员工表中涉及到的所有的部门编号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT DISTINCT department_id FROM employees;</span><br></pre></td></tr></table></figure>
+<p><strong>去重补充</strong>：如果 DISTINCT 后面跟有两个字段，去重保留的是这两个字段组合起来之后，唯一的个数。而不是只按前面的 first_name 来去重。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT DISTINCT first_name,department_id FROM employees</span><br></pre></td></tr></table></figure>
+<p><del>SELECT first_name,DISTINCT last_name FROM employees;</del><br><del>SELECT DISTINCT first_name,DISTINCT last_name FROM employees;</del><br>所以这两种写法都是错误的(会报错)。<br>如果按照第二种样子的话，比如只按 first_name 去重，还剩下 80 条。而按照 department_id 去重剩下了 70 条，那么就会有 10 条记录不对称。所以从逻辑上也是不对的。第一种的话，可以当作是第二种的特殊版，就是 first_name 去重完和没有去重结果一样。</p>
+<h3 id="MySQL中的-号"><a href="#MySQL中的-号" class="headerlink" title="MySQL中的 +号"></a>MySQL中的 +号</h3><p><strong>引子</strong>:将员工的姓与名两个字段放在一个字段中显示<br>如果和Java中的字符串连接一样，用+号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select last_name + first_name as 姓名 from employees;</span><br><span class="line">结果显示：</span><br><span class="line">+------+</span><br><span class="line">| 姓名 |</span><br><span class="line">+------+</span><br><span class="line">|    0 |</span><br><span class="line">|    0 |</span><br><span class="line">|    0 | 后面都是0</span><br></pre></td></tr></table></figure>
+<p><strong>原因</strong>：<br><strong>在java中的+号</strong>：<br>①运算符，两个操作数都为数值型<br>②连接符，只要有一个操作数为字符串</p>
+<p><strong>在mysql中的+号</strong>：<br>仅仅只有一个功能：运算符</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 100+90; 两个操作数都为数值型，则做加法运算</span><br><span class="line">只要其中一方为字符型，试图将字符型数值转换成数值型 </span><br><span class="line">select <span class="string">'123'</span>+90;    如果转换成功，则继续做加法运算</span><br><span class="line">select <span class="string">'john'</span>+90;	如果转换失败，则将字符型数值转换成0</span><br><span class="line"></span><br><span class="line">select null+10; 只要其中一方为null，则结果肯定为null</span><br></pre></td></tr></table></figure>
+<p>既然不能用 + 号，MySQL有一个concat()函数可以解决这个字符串拼接的问题</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT CONCAT(last_name, <span class="string">' '</span> ,first_name) AS 姓名 FROM employees;</span><br><span class="line">mysql&gt; SELECT CONCAT(last_name, <span class="string">' '</span> ,first_name) AS 姓名 FROM employees;</span><br><span class="line">+-------------------+</span><br><span class="line">| 姓名              |</span><br><span class="line">+-------------------+</span><br><span class="line">| K_ing Steven      |</span><br><span class="line">| Kochhar Neena     |</span><br><span class="line">| De Haan Lex       |</span><br><span class="line">| Hunold Alexander  |</span><br></pre></td></tr></table></figure>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">如果要想加的字段里面含有 null 的话，就会使最后的结果直接为 null.</span><br><span class="line">要避免这种情况的话，可以用 IFNULL()函数 ifnull(&lt;字段&gt;,&lt;要转换成的值&gt;);</span><br><span class="line">如果&lt;字段&gt;为 null, 返回&lt;要转换成的值&gt;, 否则返回原本的值.</span><br><span class="line">isnull();  判断字段或表达式是否为空。如果是，返回 1，否则返回 0.</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>测试</category>
+        <category>MySQL</category>
+        <category>基础</category>
       </categories>
       <tags>
-        <tag>杂件</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
-    <title>刘宜好帅，我好爱</title>
-    <url>/2020/04/24/life/%E5%88%98%E5%AE%9C%E5%A5%BD%E5%B8%85%EF%BC%8C%E6%88%91%E5%A5%BD%E7%88%B1/</url>
-    <content><![CDATA[<p>##第一章</p>
-<p>女朋友来个哇，为刘宜招女友</p>
-]]></content>
+    <title>常见函数2(分组函数)</title>
+    <url>/2020/05/03/MySQL/%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B02/</url>
+    <content><![CDATA[<h3 id="分组函数"><a href="#分组函数" class="headerlink" title="分组函数"></a>分组函数</h3><pre><code>功能：用作统计使用，又称为聚合函数或统计函数或组函数
+
+分类：sum 求和、avg 平均值、max 最大值 、min 最小值 、count 计算个数</code></pre><a id="more"></a>
+<pre><code>特点：
+1、sum、avg一般用于处理数值型 (处理日期型、字符串等没有意义) 
+max、min、count可以处理任何类型
+2、以上分组函数都忽略null值
+忽略null值:比如avg()函数，20个数，有7的null值，先计算出13个非null的和，然后除以 13 而不是 除以 20.   
+
+3、可以和distinct搭配实现去重之后的运算
+
+4、count函数的单独介绍
+一般使用count(*)用作统计行数
+
+5、和分组函数一起查询的字段要求是group by后的字段</code></pre><h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><pre><code>#没啥好写的
+SELECT SUM(salary) 和,ROUND(AVG(salary),2) 平均,MAX(salary) 最高,MIN(salary) 最低,COUNT(salary) 个数 FROM employees;</code></pre><h4 id="和分组函数一同查询的字段有限制"><a href="#和分组函数一同查询的字段有限制" class="headerlink" title="和分组函数一同查询的字段有限制"></a>和分组函数一同查询的字段有限制</h4><pre><code>#因为AVG只返回一条结果，而employee_id单独查询的时候是可以返回所有的，为了保证表格的完整所以就只会返回一条信息，但是这样employee_id就失去了本来的意义。
+SELECT AVG(salary),employee_id FROM employees; </code></pre><h4 id="count函数"><a href="#count函数" class="headerlink" title="count函数"></a>count函数</h4><pre><code>SELECT COUNT(salary) FROM employees;
+
+SELECT COUNT(*) FROM employees;
+#把一换成任意的 2，&quot;发大水&quot; 啥的都可以,效果和(*)一样
+#原理就是在表格的旁边，虚拟出一列值为 &quot;发大水&quot; 的列。然后再统计该列的个数
+SELECT COUNT(1) FROM employees;
+
+效率：
+MYISAM存储引擎下  ，COUNT(*)的效率高
+INNODB存储引擎下，COUNT(*)和COUNT(1)的效率差不多，比COUNT(字段)要高一些(因为是字段的话，还有判断字段是否为null)</code></pre>]]></content>
       <categories>
-        <category>Life</category>
+        <category>MySQL</category>
+        <category>基础</category>
       </categories>
       <tags>
-        <tag>生活</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
-    <title>KaTex语法测试</title>
-    <url>/2020/04/26/test/KaTex/</url>
-    <content><![CDATA[<p>$f(x) = sin(x) + 12$</p>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>杂件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>markdown语法测试</title>
-    <url>/2020/04/26/test/TestMD/</url>
-    <content><![CDATA[<p>#标题<br># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
-<p>##段落的换行可以使用空行来换行</p>
+    <title>排序查询</title>
+    <url>/2020/05/02/MySQL/%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2/</url>
+    <content><![CDATA[<h2 id="排序查询"><a href="#排序查询" class="headerlink" title="排序查询"></a>排序查询</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 查询列表 from 表名【<span class="built_in">where</span>  筛选条件 order by 排序的字段或表达式;</span><br></pre></td></tr></table></figure>
+<p>1、asc代表的是升序(默认)    desc代表的是降序<br>2、order by子句可以支持 单个字段、别名、表达式、函数、多个字段<br>3、order by子句在查询语句的最后面，除了limit子句</p>
 <a id="more"></a>
-<p>#字体<br><em>斜的</em>  <strong>加粗</strong>   <strong><em>粗斜体</em></strong><br>*斜体文本*<br>**粗体文本**<br>***粗斜体文本***</p>
-<h2 id="分割线"><a href="#分割线" class="headerlink" title="###分割线"></a>###分割线</h2><p>一行中用三个以上的星号、减号、底线<br>-------</p>
-<p>###删除线<br><del>我不知道</del><br>~~我不知道~~</p>
-<p>###下划线<br><u>画重点</u>  &emsp; &emsp;  &lt;u&gt;画重点&lt;/u&gt;</p>
-<p>####行内空格<br>我觉&emsp;得&ensp;这很&nbsp;棒<br>&amp;emsp;  &amp;ensp; &amp;nbsp;</p>
-<p>####脚注<br>我喜欢ta[^他]<br>[^他]: 小花生</p>
-]]></content>
+
+<h3 id="按单个字段排序"><a href="#按单个字段排序" class="headerlink" title="按单个字段排序"></a>按单个字段排序</h3><pre><code>SELECT * FROM employees ORDER BY salary DESC;</code></pre><h3 id="按多个字段排序"><a href="#按多个字段排序" class="headerlink" title="按多个字段排序"></a>按多个字段排序</h3><p><strong>案例</strong>：查询员工信息，要求先按工资降序，再按employee_id升序</p>
+<pre><code>SELECT * FROM employees ORDER BY salary DESC,employee_id ASC;</code></pre><h3 id="添加筛选条件再排序"><a href="#添加筛选条件再排序" class="headerlink" title="添加筛选条件再排序"></a>添加筛选条件再排序</h3><p><strong>案例</strong>：查询部门编号&gt;=90的员工信息，并按员工编号降序</p>
+<pre><code>SELECT * FROM employees WHERE department_id&gt;=90 ORDER BY employee_id DESC;</code></pre><h3 id="按表达式排序"><a href="#按表达式排序" class="headerlink" title="按表达式排序"></a>按表达式排序</h3><p><strong>案例</strong>：查询员工信息 按年薪降序</p>
+<pre><code>SELECT *,salary*12*(1+IFNULL(commission_pct,0)) FROM employees ORDER BY salary*12*(1+IFNULL(commission_pct,0)) DESC;
+// 也可以用别名
+SELECT *,salary*12*(1+IFNULL(commission_pct,0)) 年薪 FROM employees ORDER BY 年薪 ASC;</code></pre><h3 id="按函数排序"><a href="#按函数排序" class="headerlink" title="按函数排序"></a>按函数排序</h3><p><strong>案例</strong>：查询员工名，并且按名字的长度降序</p>
+<pre><code>SELECT LENGTH(last_name),last_name FROM employees ORDER BY LENGTH(last_name) DESC;</code></pre>]]></content>
       <categories>
-        <category>测试</category>
+        <category>MySQL</category>
+        <category>基础</category>
       </categories>
       <tags>
-        <tag>杂件</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
-    <title>图片上传与文件下载</title>
-    <url>/2020/04/25/test/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/</url>
-    <content><![CDATA[<h2 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1.设置站点配置_config.yml:将post_asset_folder: <span class="literal">false</span>改为post_asset_folder: <span class="literal">true</span></span><br><span class="line">2.安装插件:npm install https://github.com/CodeFalling/hexo-asset-image -- save</span><br><span class="line">3.运行hexo n <span class="string">"XXXXXX"</span>,生成XXXXX.md博文时就会在/<span class="built_in">source</span>/_posts目录下生成XXXXXX的文件夹，将你想在XXXXX博文中插入的照片放置到这个同名文件夹中即可，图片的命名随意。</span><br><span class="line">4.添加图片:在想添加的位置写入![](图片名字.图片格式),例如![](1.png)。</span><br></pre></td></tr></table></figure>
+    <title>常见函数1(单行函数)</title>
+    <url>/2020/05/02/MySQL/%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B01/</url>
+    <content><![CDATA[<h2 id="单行函数"><a href="#单行函数" class="headerlink" title="单行函数"></a>单行函数</h2><pre><code>单行函数就是放进去5条，能出来5条。 比如length();
+多行就是只会出来一条。比如sum();</code></pre><a id="more"></a>
+<h3 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h3><h4 id="length-获取参数值的字节个数"><a href="#length-获取参数值的字节个数" class="headerlink" title="length 获取参数值的字节个数"></a>length 获取参数值的字节个数</h4><pre><code>SELECT LENGTH(&apos;john&apos;);  // 4 
+SELECT LENGTH(&apos;张三丰hahaha&apos;);  // 15
+/* 字节个数与你当前使用的字符集有关。  
+如 utf8: 一个汉字3个字节，一个英文1个字节  gbk:  一个汉字2个字节，一个英文1个字节 */
+SHOW VARIABLES LIKE &apos;%char%&apos;  //查看当前使用的字符集</code></pre><h4 id="concat-拼接字符串"><a href="#concat-拼接字符串" class="headerlink" title="concat 拼接字符串"></a>concat 拼接字符串</h4><pre><code>SELECT CONCAT(last_name,&apos;_&apos;,first_name) 姓名 FROM employees;</code></pre><h4 id="upper、lower-大小写"><a href="#upper、lower-大小写" class="headerlink" title="upper、lower 大小写"></a>upper、lower 大小写</h4><pre><code>SELECT UPPER(&apos;john&apos;);
+SELECT LOWER(&apos;joHn&apos;);
+#示例：将姓变大写，名变小写，然后拼接
+SELECT CONCAT(UPPER(last_name),LOWER(first_name)) 姓名 FROM employees;</code></pre><h4 id="substr、substring-截取字符串"><a href="#substr、substring-截取字符串" class="headerlink" title="substr、substring  截取字符串"></a>substr、substring  截取字符串</h4><pre><code>注意：索引从1开始
+#截取从指定索引处后面所有字符
+SELECT SUBSTR(&apos;李莫愁爱上了陆展元&apos;,7) out_put;
 
-<h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1.首先修改程序配置文件 _config.yml 中的 post_asset_folder:，这个选项设置为 True。</span><br><span class="line"></span><br><span class="line">2.在 <span class="built_in">source</span> 文件夹下创建 \download 文件夹，将我们需要上传的本地文件移动到这个文件夹。（如 test.pdf）</span><br><span class="line"></span><br><span class="line">3.最后在文章中，按照下面的格式引入：</span><br><span class="line"></span><br><span class="line">[ 点击下载文件 ](/download/test.pdf)</span><br><span class="line">4.重新hexo clean, hexo g 和 hexo d 更新就可以了。</span><br></pre></td></tr></table></figure>
-<p>转载自：<a href="https://blog.csdn.net/Fitz1318/article/details/86548129">图片上传</a><br>        <a href="http://leungyukshing.cn/archives/HexoUploadFile.html">文件下载</a></p>
-]]></content>
+#截取从指定索引处指定字符长度的字符    最后一个参数为截取的长度
+SELECT SUBSTR(&apos;李莫愁爱上了陆展元&apos;,1,3) out_put;
+
+
+#案例：姓名中首字符大写，其他字符小写然后用_拼接，显示出来
+
+SELECT CONCAT(UPPER(SUBSTR(last_name,1,1)),&apos;_&apos;,LOWER(SUBSTR(last_name,2)))  out_put
+FROM employees;</code></pre><h4 id="instr-返回子串第一次出现的索引，如果找不到返回0"><a href="#instr-返回子串第一次出现的索引，如果找不到返回0" class="headerlink" title="instr 返回子串第一次出现的索引，如果找不到返回0"></a>instr 返回子串第一次出现的索引，如果找不到返回0</h4><pre><code>注意：索引从1开始
+SELECT INSTR(&apos;杨不殷六侠悔爱上了殷六侠&apos;,&apos;殷八侠&apos;) AS out_put;</code></pre><h4 id="trim-去除字符串首尾指定字符"><a href="#trim-去除字符串首尾指定字符" class="headerlink" title="trim 去除字符串首尾指定字符"></a>trim 去除字符串首尾指定字符</h4><pre><code>#默认删除首尾空格
+SELECT LENGTH(TRIM(&apos;    张翠山    &apos;)) AS out_put;
+#也可以在指定删除某个字符 | 字符串
+SELECT TRIM(&apos;aa&apos; FROM &apos;aaaaaaaaa张aaaaaaaaaaaa翠山aaaaaaa&apos;)  AS out_put;</code></pre><h4 id="lpad、rpad-字符串填充"><a href="#lpad、rpad-字符串填充" class="headerlink" title="lpad、rpad  字符串填充"></a>lpad、rpad  字符串填充</h4><pre><code>#如果字符串的字符长度不够指定的长度，则填充 &apos;*&apos;.  如果本身的字符长度大于指定的长度，则输出的时候会截取到指定的长度
+SELECT LPAD(&apos;殷素素&apos;,2,&apos;*&apos;) AS out_put;  //结果为：殷素
+SELECT LPAD(&apos;殷素素&apos;,5,&apos;*&apos;) AS out_put;  //结果为：***殷素
+
+rpad 同理.</code></pre><h4 id="replace-替换"><a href="#replace-替换" class="headerlink" title="replace 替换"></a>replace 替换</h4><pre><code>#将字符串中所有的&apos;周芷若&apos;替换为&apos;赵敏&apos;
+SELECT REPLACE(&apos;周芷若周芷若周芷若周芷若张无忌爱上了周芷若&apos;,&apos;周芷若&apos;,&apos;赵敏&apos;) AS out_put;</code></pre><h3 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h3><h4 id="round-四舍五入"><a href="#round-四舍五入" class="headerlink" title="round 四舍五入"></a>round 四舍五入</h4><pre><code>SELECT ROUND(-1.55);  // -2
+#参数: 1.567(传入的数字)  【2(保留小数点后几位)】不输入的话，默认为整数
+SELECT ROUND(1.567,2);  // 1.57</code></pre><h4 id="ceil-向上取整"><a href="#ceil-向上取整" class="headerlink" title="ceil 向上取整"></a>ceil 向上取整</h4><pre><code>#返回&gt;=该参数的最小整数
+SELECT CEIL(-1.02);  // -1</code></pre><h4 id="floor-向下取整"><a href="#floor-向下取整" class="headerlink" title="floor 向下取整"></a>floor 向下取整</h4><pre><code>#返回&lt;=该参数的最大整数
+SELECT FLOOR(-9.99);  // -10</code></pre><h4 id="truncate-截断"><a href="#truncate-截断" class="headerlink" title="truncate 截断"></a>truncate 截断</h4><pre><code>#参数: 1.69999(传入的数字), 1(保留小数点后几位)
+SELECT TRUNCATE(1.69999,1);  // </code></pre><h4 id="mod取余"><a href="#mod取余" class="headerlink" title="mod取余"></a>mod取余</h4><pre><code>/*
+mod(a,b) ：  a-a/b*b (取模公式)  
+mod(-10,-3):-10- (-10)/(-3)*（  -3）=-1
+10%3 |  10%-3  |  -10%3  都可以带入这个公式得到答案  
+*/
+SELECT MOD(10,-3);
+SELECT 10%3;</code></pre><h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><h4 id="now-返回当前系统日期-时间"><a href="#now-返回当前系统日期-时间" class="headerlink" title="now 返回当前系统日期+时间"></a>now 返回当前系统日期+时间</h4><pre><code>SELECT NOW();</code></pre><h4 id="curdate-返回当前系统日期，不包含时分秒"><a href="#curdate-返回当前系统日期，不包含时分秒" class="headerlink" title="curdate 返回当前系统日期，不包含时分秒"></a>curdate 返回当前系统日期，不包含时分秒</h4><pre><code>SELECT CURDATE();</code></pre><h4 id="curtime-返回当前时间，不包含日期"><a href="#curtime-返回当前时间，不包含日期" class="headerlink" title="curtime 返回当前时间，不包含日期"></a>curtime 返回当前时间，不包含日期</h4><pre><code>SELECT CURTIME();</code></pre><h4 id="可以获取指定的部分，年、月、日、小时、分钟、秒"><a href="#可以获取指定的部分，年、月、日、小时、分钟、秒" class="headerlink" title="可以获取指定的部分，年、月、日、小时、分钟、秒"></a>可以获取指定的部分，年、月、日、小时、分钟、秒</h4><pre><code>SELECT YEAR(NOW()) 年;
+SELECT YEAR(&apos;1998-1-1&apos;) 年;
+
+SELECT MONTH(NOW()) 月;   // 返回数字月
+SELECT MONTHNAME(NOW()) 月;  // 返回英文月
+...此外也有返回 日，时，分，秒的</code></pre><h4 id="str-to-date-将字符通过指定的格式转换成日期"><a href="#str-to-date-将字符通过指定的格式转换成日期" class="headerlink" title="str_to_date 将字符通过指定的格式转换成日期"></a>str_to_date 将字符通过指定的格式转换成日期</h4><pre><code>SELECT STR_TO_DATE(&apos;1998-3-2&apos;,&apos;%Y-%c-%d&apos;) AS out_put;
+
+#查询入职日期为1992--4-3的员工信息
+#如果是规则的情况，可以用这种
+SELECT * FROM employees WHERE hiredate = &apos;1992-4-3&apos;;
+#如果客户输入的规则和你的不一样，可以自定义成用户输入的格式
+SELECT * FROM employees WHERE hiredate = STR_TO_DATE(&apos;4-3 1992&apos;,&apos;%c-%d %Y&apos;);</code></pre><h4 id="date-format-将日期转换成字符"><a href="#date-format-将日期转换成字符" class="headerlink" title="date_format 将日期转换成字符"></a>date_format 将日期转换成字符</h4><pre><code>#将日期转换成指定的字符
+SELECT DATE_FORMAT(NOW(),&apos;%y年%m月%d日&apos;) AS out_put;
+
+#查询有奖金的员工名和入职日期(xx月/xx日 xx年)
+SELECT last_name,DATE_FORMAT(hiredate,&apos;%m月/%d日 %y年&apos;) 入职日期 FROM employees WHERE commission_pct IS NOT NULL;</code></pre><h4 id="diffrence-两个日期的天数差"><a href="#diffrence-两个日期的天数差" class="headerlink" title="diffrence 两个日期的天数差"></a>diffrence 两个日期的天数差</h4><pre><code>#会用前者减去后者(不能调换前后顺序 MySQL版本：5.7.11),现在或许可以了
+#如果不能够计算，会返回 null
+SELECT DATEDIFF(&apos;2017-10-1&apos;,&apos;2017-9-29&apos;);</code></pre><h3 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h3><pre><code>SELECT VERSION();   #查版本
+SELECT DATABASE();  #查当前use的是哪个数据库 
+SELECT USER();      #查当前的用户是谁
+SELECT PASSWORD(&apos;ooop&apos;);  #把&apos;ooop&apos;加密  返回加密之后的值
+SELECT MD5(&apos;ooop&apos;);  #也是加密</code></pre><h3 id="控制函数"><a href="#控制函数" class="headerlink" title="控制函数"></a>控制函数</h3><h4 id="if函数：-if-else-的效果"><a href="#if函数：-if-else-的效果" class="headerlink" title="if函数： if else 的效果"></a>if函数： if else 的效果</h4><pre><code>#类似于Java中的三元运算符
+SELECT IF(10&lt;5,&apos;大&apos;,&apos;小&apos;); 
+SELECT last_name,commission_pct,IF(commission_pct IS NULL,&apos;没奖金，呵呵&apos;,&apos;有奖金，嘻嘻&apos;) 备注 FROM employees;</code></pre><h4 id="case函数的使用一：-switch-case-的效果"><a href="#case函数的使用一：-switch-case-的效果" class="headerlink" title="case函数的使用一： switch case 的效果"></a>case函数的使用一： switch case 的效果</h4><pre><code>#案例：查询员工的工资，要求
+部门号=30，显示的工资为1.1倍
+部门号=40，显示的工资为1.2倍
+部门号=50，显示的工资为1.3倍
+其他部门，显示的工资为原工资
+
+#case的写法，适用于单一的值，就不是范围型的
+#如果then后面跟着的是值，不用加 ;  是语句的话可以把MySQL的结束符先换成其他的符号
+SELECT salary 原始工资,department_id,
+CASE department_id
+WHEN 30 THEN salary*1.1
+WHEN 40 THEN salary*1.2
+WHEN 50 THEN salary*1.3
+ELSE salary
+END AS 新工资
+FROM employees;</code></pre><h4 id="case-函数的使用二：类似于-多重if"><a href="#case-函数的使用二：类似于-多重if" class="headerlink" title="case 函数的使用二：类似于 多重if"></a>case 函数的使用二：类似于 多重if</h4><pre><code>#案例：查询员工的工资的情况
+如果工资&gt;20000,显示A级别
+如果工资&gt;15000,显示B级别
+如果工资&gt;10000，显示C级别
+否则，显示D级别
+#多重if适用于 范围型的场景
+SELECT salary,
+CASE 
+WHEN salary&gt;20000 THEN &apos;A&apos;
+WHEN salary&gt;15000 THEN &apos;B&apos;
+WHEN salary&gt;10000 THEN &apos;C&apos;
+ELSE &apos;D&apos;
+END AS 工资级别
+FROM employees;</code></pre>]]></content>
       <categories>
-        <category>hexo</category>
+        <category>MySQL</category>
+        <category>基础</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
-    <title>数据库基本概念</title>
-    <url>/2020/05/02/MySQL/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<h2 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h2><pre><code>1、DB：数据库，保存一组有组织的数据的容器
-2、DBMS：数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据
-3、SQL:结构化查询语言，用于和DBMS通信的语言</code></pre><h2 id="数据库存储数据的特点"><a href="#数据库存储数据的特点" class="headerlink" title="数据库存储数据的特点"></a>数据库存储数据的特点</h2><pre><code>1、将数据放到表中，表再放到库中
-2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。
-3、表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。
-4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”
-5、表中的数据是按行存储的，每一行类似于java中的“对象”。</code></pre><a id="more"></a>
-<h2 id="MySQL服务的登录"><a href="#MySQL服务的登录" class="headerlink" title="MySQL服务的登录"></a>MySQL服务的登录</h2><pre><code>方式一：通过mysql自带的客户端
-只限于root用户
+    <title>分组查询</title>
+    <url>/2020/05/03/MySQL/%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2/</url>
+    <content><![CDATA[<h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 查询列表</span><br><span class="line">from 表</span><br><span class="line">【<span class="built_in">where</span> 筛选条件】</span><br><span class="line">group by 分组的字段</span><br><span class="line">【order by 排序的字段】;</span><br><span class="line">1、和分组函数一同查询的字段必须是group by后出现的字段</span><br><span class="line">2、筛选分为两类：分组前筛选和分组后筛选</span><br><span class="line">		针对的表			位置		连接的关键字</span><br><span class="line">分组前筛选	原始表				group by前	<span class="built_in">where</span></span><br><span class="line">	</span><br><span class="line">分组后筛选	group by后的结果集    		group by后	having</span><br><span class="line"></span><br><span class="line">比如要查询每个工种的最小工资，并显示最小工资&gt;5000的工种有哪些 ？</span><br><span class="line">①.你需要先筛选出每个工种的最小工资是多少，然后才能判断最小工资是不是&gt;5000，但是最小工资并不能直接通过表中现有的字段来得到。</span><br><span class="line">②.所以判断大于5000是需要先筛选一次，才能得知的。而写在<span class="built_in">where</span>之后的都是表中现有的信息(字段)，所以又有了having拿来存放筛选过一次之后才能的得到的信息。</span><br><span class="line"></span><br><span class="line">一般来讲，能用分组前筛选的，尽量使用分组前筛选，提高效率</span><br><span class="line"></span><br><span class="line">3、分组可以按单个字段也可以按多个字段</span><br><span class="line">4、可以搭配着排序使用</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="案例1：查询每个位置的部门个数"><a href="#案例1：查询每个位置的部门个数" class="headerlink" title="案例1：查询每个位置的部门个数"></a>案例1：查询每个位置的部门个数</h4><pre><code>SELECT COUNT(*),location_id
+FROM departments
+GROUP BY location_id;</code></pre><h4 id="案例2：查询有奖金的每个领导手下员工的平均工资"><a href="#案例2：查询有奖金的每个领导手下员工的平均工资" class="headerlink" title="案例2：查询有奖金的每个领导手下员工的平均工资"></a>案例2：查询有奖金的每个领导手下员工的平均工资</h4><pre><code>#分组前的筛选
+SELECT AVG(salary),manager_id
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY manager_id;</code></pre><h4 id="案例3：每个工种有奖金的员工的最高工资-gt-12000的工种编号和最高工资"><a href="#案例3：每个工种有奖金的员工的最高工资-gt-12000的工种编号和最高工资" class="headerlink" title="案例3：每个工种有奖金的员工的最高工资&gt;12000的工种编号和最高工资"></a>案例3：每个工种有奖金的员工的最高工资&gt;12000的工种编号和最高工资</h4><pre><code>#分组后筛选
+SELECT job_id,MAX(salary)
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY job_id
+HAVING MAX(salary)&gt;12000;</code></pre><h4 id="案例4：每个工种有奖金的员工的最高工资-gt-6000的工种编号和最高工资-按最高工资升序"><a href="#案例4：每个工种有奖金的员工的最高工资-gt-6000的工种编号和最高工资-按最高工资升序" class="headerlink" title="案例4：每个工种有奖金的员工的最高工资&gt;6000的工种编号和最高工资,按最高工资升序"></a>案例4：每个工种有奖金的员工的最高工资&gt;6000的工种编号和最高工资,按最高工资升序</h4><pre><code>#添加排序(支持别名)
+SELECT job_id,MAX(salary) m
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY job_id
+HAVING m&gt;6000
+ORDER BY m ;</code></pre><h4 id="案例5：查询每个工种每个部门的最低工资-并按最低工资降序"><a href="#案例5：查询每个工种每个部门的最低工资-并按最低工资降序" class="headerlink" title="案例5：查询每个工种每个部门的最低工资,并按最低工资降序"></a>案例5：查询每个工种每个部门的最低工资,并按最低工资降序</h4><pre><code>#按多个字段分组
+SELECT MIN(salary),job_id,department_id
+FROM employees
+GROUP BY department_id,job_id
+ORDER BY MIN(salary) DESC;</code></pre>]]></content>
+      <categories>
+        <category>MySQL</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>连接查询1(内连接)</title>
+    <url>/2020/05/03/MySQL/%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A21/</url>
+    <content><![CDATA[<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><pre><code>含义：又称多表查询，当查询的字段来自于多个表时，就会用到连接查询
 
-方式二：通过windows自带的客户端
-登录：
-mysql 【-h主机名 -P端口号 】-u用户名 -p密码</code></pre><h2 id="SQL的语言分类"><a href="#SQL的语言分类" class="headerlink" title="SQL的语言分类"></a>SQL的语言分类</h2><pre><code>DQL（Data Query Language）：数据查询语言
-    select 
-DML(Data Manipulate Language):数据操作语言
-    insert 、update、delete
-DDL（Data Define Languge）：数据定义语言
-    create、drop、alter
-TCL（Transaction Control Language）：事务控制语言
-    commit、rollback</code></pre><h2 id="之后使用到的数据库表"><a href="#之后使用到的数据库表" class="headerlink" title="之后使用到的数据库表"></a>之后使用到的数据库表</h2><p><a href="/download/myemployees.sql"> 点击下载文件 </a><br><img src="/2020/05/02/MySQL/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/%E8%A1%A8%E4%B8%8E%E8%A1%A8%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt></p>
-]]></content>
+SELECT NAME,boyName FROM boys,beauty;
+笛卡尔乘积现象：表1 有m行，表2有n行，结果=m*n行
+
+发生原因：没有有效的连接条件
+如何避免：添加有效的连接条件
+
+分类：
+    按年代分类：
+    sql92标准:仅仅支持内连接
+    sql99标准【推荐】：支持内连接+外连接（左外和右外）+交叉连接
+
+    按功能分类：
+        内连接：
+            等值连接
+            非等值连接
+            自连接
+        外连接：
+            左外连接
+            右外连接
+            全外连接
+
+        交叉连接</code></pre><a id="more"></a>
+<h3 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h3><pre><code>语法：
+
+select 查询列表
+from 表1 别名
+inner join 表2 别名
+on 连接条件;
+
+分类：等值、非等值、自连接
+
+特点：
+①添加排序、分组、筛选
+②inner可以省略
+③ 筛选条件放在where后面，连接条件放在on后面，提高分离性，便于阅读
+④inner join连接和sql92语法中的等值连接效果是一样的，都是查询多表的交集</code></pre><h4 id="等值连接"><a href="#等值连接" class="headerlink" title="等值连接"></a>等值连接</h4><p><strong>案例1</strong>：查询员工名和对应的部门名<br>    #92写法<br>    SELECT last_name,department_name<br>    FROM employees,departments<br>    WHERE employees.<code>department_id</code>=departments.<code>department_id</code>;</p>
+<pre><code>#99写法
+SELECT last_name,department_name
+FROM departments d
+INNER JOIN  employees e
+ON e.`department_id` = d.`department_id`;</code></pre><p><strong>案例2</strong>：查询部门个数&gt;3的城市名和部门个数，（添加分组+筛选）</p>
+<pre><code>#①查询每个城市的部门个数
+#②在①结果上筛选满足条件的
+SELECT city,COUNT(*) 部门个数
+FROM departments d
+INNER JOIN locations l
+ON d.`location_id`=l.`location_id`
+GROUP BY city
+HAVING COUNT(*)&gt;3;</code></pre><p><strong>案例3</strong>：查询员工名、部门名、工种名，并按部门名降序（添加三表连接）</p>
+<pre><code>SELECT last_name,department_name,job_title
+FROM employees e
+INNER JOIN departments d ON e.`department_id`=d.`department_id`
+INNER JOIN jobs j ON e.`job_id` = j.`job_id`
+
+ORDER BY department_name DESC;</code></pre><h4 id="非等值连接"><a href="#非等值连接" class="headerlink" title="非等值连接"></a>非等值连接</h4><pre><code>特点：有一个比较的范围</code></pre><p>新加工资级别表<br><img src="/2020/05/03/MySQL/%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A21/job_grades%E8%A1%A8.png" alt></p>
+<pre><code>#查询员工的工资级别
+
+SELECT salary,grade_level
+FROM employees e
+JOIN job_grades g
+ON e.`salary` BETWEEN g.`lowest_sal` AND g.`highest_sal`;
+
+
+#查询工资级别的个数&gt;20的个数，并且按工资级别降序
+SELECT COUNT(*),grade_level
+FROM employees e
+JOIN job_grades g
+ON e.`salary` BETWEEN g.`lowest_sal` AND g.`highest_sal`
+GROUP BY grade_level
+HAVING COUNT(*)&gt;20
+ORDER BY grade_level DESC;</code></pre><h4 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h4><pre><code>#把自己的表看成是多张表的连接
+
+#查询员工的名字、上级的名字
+SELECT e.last_name,m.last_name
+FROM employees e
+JOIN employees m
+ON e.`manager_id`= m.`employee_id`;
+
+#查询姓名中包含字符k的员工的名字、上级的名字
+SELECT e.last_name,m.last_name
+FROM employees e
+JOIN employees m
+ON e.`manager_id`= m.`employee_id`
+WHERE e.`last_name` LIKE &apos;%k%&apos;;</code></pre>]]></content>
       <categories>
         <category>MySQL</category>
         <category>基础</category>
@@ -181,46 +403,154 @@ TCL（Transaction Control Language）：事务控制语言
       </tags>
   </entry>
   <entry>
-    <title>基础查询</title>
-    <url>/2020/05/01/MySQL/%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2/</url>
-    <content><![CDATA[<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 查询列表 from 表名;</span><br></pre></td></tr></table></figure>
-<p><strong>查询列表</strong>：<br>1、查询列表可以是：表中的字段、常量值、表达式、函数<br>2、查询的结果是一个虚拟的表格</p>
-<h3 id="查询字段"><a href="#查询字段" class="headerlink" title="查询字段"></a>查询字段</h3><p>1.查询表中的单个字段</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name FROM employees;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>2.查询表中的多个字段</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name,salary,email FROM employees;</span><br></pre></td></tr></table></figure>
-<p>3.查询表中的所有字段</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT * FROM employees;</span><br></pre></td></tr></table></figure>
-<p><strong>补充</strong>：如果你的字段名和MySQL的关键字冲突，那么可以通过给字段名添加双引号的方式来避免冲突</p>
-<h3 id="查询常量值-目前不知道有啥用"><a href="#查询常量值-目前不知道有啥用" class="headerlink" title="查询常量值(目前不知道有啥用)"></a>查询常量值(目前不知道有啥用)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100;</span><br><span class="line">SELECT <span class="string">'john'</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="查询表达式"><a href="#查询表达式" class="headerlink" title="查询表达式"></a>查询表达式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100%98;</span><br></pre></td></tr></table></figure>
-<h3 id="查询函数"><a href="#查询函数" class="headerlink" title="查询函数"></a>查询函数</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT VERSION();</span><br></pre></td></tr></table></figure>
-<h3 id="起别名"><a href="#起别名" class="headerlink" title="起别名"></a>起别名</h3><p> ①便于理解<br> ②如果要查询的字段有重名的情况，使用别名可以区分开来</p>
-<p><strong>方式一</strong>：使用as</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT 100%98 AS 结果;</span><br><span class="line">SELECT last_name AS 姓,first_name AS 名 FROM employees;</span><br></pre></td></tr></table></figure>
-<p><strong>方式二</strong>：使用空格</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT last_name 姓,first_name 名 FROM employees;</span><br></pre></td></tr></table></figure>
+    <title>数据库基本概念</title>
+    <url>/2020/05/02/MySQL/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h2 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h2><pre><code>1、DB：数据库，保存一组有组织的数据的容器
+2、DBMS：数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据
+3、SQL:结构化查询语言，用于和DBMS通信的语言</code></pre><h2 id="数据库存储数据的特点"><a href="#数据库存储数据的特点" class="headerlink" title="数据库存储数据的特点"></a>数据库存储数据的特点</h2><pre><code>1、将数据放到表中，表再放到库中
+2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。
+3、表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。
+4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”
+5、表中的数据是按行存储的，每一行类似于java中的“对象”。</code></pre><a id="more"></a>
+<h2 id="MySQL服务的登录"><a href="#MySQL服务的登录" class="headerlink" title="MySQL服务的登录"></a>MySQL服务的登录</h2><pre><code>方式一：通过mysql自带的客户端
+只限于root用户
 
-<p><strong>补充</strong>：如果你的别名的含有MySQL的关键字比如 out put 中的 out，那么就需要给别名一个双引号(推荐)或者单引号来标识</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT salary AS <span class="string">"out put"</span> FROM employees;</span><br></pre></td></tr></table></figure>
-<h3 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h3><p><strong>引子</strong>：查询员工表中涉及到的所有的部门编号</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT DISTINCT department_id FROM employees;</span><br></pre></td></tr></table></figure>
-
-<h3 id="MySQL中的-号"><a href="#MySQL中的-号" class="headerlink" title="MySQL中的 +号"></a>MySQL中的 +号</h3><p><strong>引子</strong>:将员工的姓与名两个字段放在一个字段中显示<br>如果和Java中的字符串连接一样，用+号</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select last_name + first_name as 姓名 from employees;</span><br><span class="line">结果显示：</span><br><span class="line">+------+</span><br><span class="line">| 姓名 |</span><br><span class="line">+------+</span><br><span class="line">|    0 |</span><br><span class="line">|    0 |</span><br><span class="line">|    0 | 后面都是0</span><br></pre></td></tr></table></figure>
-<p><strong>原因</strong>：<br><strong>在java中的+号</strong>：<br>①运算符，两个操作数都为数值型<br>②连接符，只要有一个操作数为字符串</p>
-<p><strong>在mysql中的+号</strong>：<br>仅仅只有一个功能：运算符</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">select 100+90; 两个操作数都为数值型，则做加法运算</span><br><span class="line">只要其中一方为字符型，试图将字符型数值转换成数值型 </span><br><span class="line">select <span class="string">'123'</span>+90;    如果转换成功，则继续做加法运算</span><br><span class="line">select <span class="string">'john'</span>+90;	如果转换失败，则将字符型数值转换成0</span><br><span class="line"></span><br><span class="line">select null+10; 只要其中一方为null，则结果肯定为null</span><br></pre></td></tr></table></figure>
-<p>既然不能用 + 号，MySQL有一个concat()函数可以解决这个字符串拼接的问题</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SELECT CONCAT(last_name, <span class="string">' '</span> ,first_name) AS 姓名 FROM employees;</span><br><span class="line">mysql&gt; SELECT CONCAT(last_name, <span class="string">' '</span> ,first_name) AS 姓名 FROM employees;</span><br><span class="line">+-------------------+</span><br><span class="line">| 姓名              |</span><br><span class="line">+-------------------+</span><br><span class="line">| K_ing Steven      |</span><br><span class="line">| Kochhar Neena     |</span><br><span class="line">| De Haan Lex       |</span><br><span class="line">| Hunold Alexander  |</span><br></pre></td></tr></table></figure>
-<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">如果要想加的字段里面含有 null 的话，就会使最后的结果直接为 null.</span><br><span class="line">要避免这种情况的话，可以用 IFNULL()函数 ifnull(&lt;字段&gt;,&lt;要转换成的值&gt;);</span><br><span class="line">如果&lt;字段&gt;为 null, 返回&lt;要转换成的值&gt;, 否则返回原本的值.</span><br><span class="line">isnull();  判断字段或表达式是否为空。如果是，返回 1，否则返回 0.</span><br></pre></td></tr></table></figure>]]></content>
+方式二：通过windows自带的客户端
+登录：
+mysql 【-h主机名 -P端口号 】-u用户名 -p密码</code></pre><h2 id="SQL的语言分类"><a href="#SQL的语言分类" class="headerlink" title="SQL的语言分类"></a>SQL的语言分类</h2><pre><code>DQL（Data Query Language）：数据查询语言
+    select 
+DML(Data Manipulate Language):数据操作语言
+    insert 、update、delete
+DDL（Data Define Languge）：数据定义语言
+    create、drop、alter
+TCL（Transaction Control Language）：事务控制语言
+    commit、rollback</code></pre><h2 id="之后使用到的数据库表"><a href="#之后使用到的数据库表" class="headerlink" title="之后使用到的数据库表"></a>之后使用到的数据库表</h2><p><a href="/download/myemployees.sql"> 点击下载文件 </a><br><img src="/2020/05/02/MySQL/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/%E8%A1%A8%E4%B8%8E%E8%A1%A8%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt></p>
+]]></content>
       <categories>
         <category>MySQL</category>
         <category>基础</category>
       </categories>
       <tags>
         <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown语法测试</title>
+    <url>/2020/04/26/test/TestMD/</url>
+    <content><![CDATA[<p>#标题<br># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
+<p>##段落的换行可以使用空行来换行</p>
+<a id="more"></a>
+<p>#字体<br><em>斜的</em>  <strong>加粗</strong>   <strong><em>粗斜体</em></strong><br>*斜体文本*<br>**粗体文本**<br>***粗斜体文本***</p>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="###分割线"></a>###分割线</h2><p>一行中用三个以上的星号、减号、底线<br>-------</p>
+<p>###删除线<br><del>我不知道</del><br>~~我不知道~~</p>
+<p>###下划线<br><u>画重点</u>  &emsp; &emsp;  &lt;u&gt;画重点&lt;/u&gt;</p>
+<p>####行内空格<br>我觉&emsp;得&ensp;这很&nbsp;棒<br>&amp;emsp;  &amp;ensp; &amp;nbsp;</p>
+<p>####脚注<br>我喜欢ta[^他]<br>[^他]: 小花生</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>杂件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>刘宜好帅，我好爱</title>
+    <url>/2020/04/24/life/%E5%88%98%E5%AE%9C%E5%A5%BD%E5%B8%85%EF%BC%8C%E6%88%91%E5%A5%BD%E7%88%B1/</url>
+    <content><![CDATA[<p>##第一章</p>
+<p>女朋友来个哇，为刘宜招女友</p>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KaTex语法测试</title>
+    <url>/2020/04/26/test/KaTex/</url>
+    <content><![CDATA[<p>$f(x) = sin(x) + 12$</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>杂件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>连接查询2(外连接)</title>
+    <url>/2020/05/03/MySQL/%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A22/</url>
+    <content><![CDATA[<h3 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h3><pre><code>1.应用场景：用于查询一个表中有，另一个表没有的记录
+2.外连接的查询结果为主表中的所有记录 +
+拿主表中的值和从表做笛卡尔，有的话显示从表的值，否则从表显示null
+    左外连接，left join左边的是主表
+    右外连接，right join右边的是主表
+ 3、左外和右外交换两个表的顺序，可以实现同样的效果 
+ 4、全外连接=内连接的结果+表1中有但表2没有的+表2中有但表1没有的</code></pre><h4 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h4><pre><code># 查询男朋友 不在男神表的的女神名
+SELECT b.`name` 
+FROM beauty b
+LEFT OUTER JOIN boys bo
+ON b.`boyfriend_id` = bo.`id`
+WHERE bo.`id` IS NULL;</code></pre><a id="more"></a>
+<h4 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h4><pre><code># 查询男朋友 不在男神表的的女神名(右外是一样的)
+SELECT b.`name` 
+FROM boys bo
+RIGHT OUTER JOIN beauty b
+ON b.`boyfriend_id` = bo.`id`
+WHERE bo.`id` IS NULL;</code></pre><h4 id="全外连接"><a href="#全外连接" class="headerlink" title="全外连接"></a>全外连接</h4><p>左外和右外的所有值之和<br>    #MySQL5.7.11 不支持<br>    SELECT b.<em>,bo.</em><br>    FROM beauty b<br>    FULL OUTER JOIN boys bo<br>    ON b.<code>boyfriend_id</code> = bo.id;<br>图解：<br><img src="/2020/05/03/MySQL/%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A22/%E5%85%A8%E5%A4%96%E8%BF%9E%E6%8E%A5.png" alt></p>
+<h4 id="交叉连接"><a href="#交叉连接" class="headerlink" title="交叉连接"></a>交叉连接</h4><pre><code>#就是笛卡尔积
+SELECT b.*,bo.*
+FROM beauty b
+CROSS JOIN boys bo;</code></pre><p>补充：用到的新表<br><img src="/2020/05/03/MySQL/%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A22/girls.png" alt><br><img src="/2020/05/03/MySQL/%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A22/boys.png" alt></p>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/04/24/test/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>杂件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图片上传与文件下载</title>
+    <url>/2020/04/25/test/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/</url>
+    <content><![CDATA[<h2 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1.设置站点配置_config.yml:将post_asset_folder: <span class="literal">false</span>改为post_asset_folder: <span class="literal">true</span></span><br><span class="line">2.安装插件:npm install https://github.com/CodeFalling/hexo-asset-image -- save</span><br><span class="line">3.运行hexo n <span class="string">"XXXXXX"</span>,生成XXXXX.md博文时就会在/<span class="built_in">source</span>/_posts目录下生成XXXXXX的文件夹，将你想在XXXXX博文中插入的照片放置到这个同名文件夹中即可，图片的命名随意。</span><br><span class="line">4.添加图片:在想添加的位置写入![](图片名字.图片格式),例如![](1.png)。</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1.首先修改程序配置文件 _config.yml 中的 post_asset_folder:，这个选项设置为 True。</span><br><span class="line"></span><br><span class="line">2.在 <span class="built_in">source</span> 文件夹下创建 \download 文件夹，将我们需要上传的本地文件移动到这个文件夹。（如 test.pdf）</span><br><span class="line"></span><br><span class="line">3.最后在文章中，按照下面的格式引入：</span><br><span class="line"></span><br><span class="line">[ 点击下载文件 ](/download/test.pdf)</span><br><span class="line">4.重新hexo clean, hexo g 和 hexo d 更新就可以了。</span><br></pre></td></tr></table></figure>
+<p>转载自：<a href="https://blog.csdn.net/Fitz1318/article/details/86548129">图片上传</a><br>        <a href="http://leungyukshing.cn/archives/HexoUploadFile.html">文件下载</a></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
